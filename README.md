@@ -2,6 +2,8 @@
 
 This is a Docker image based on [`git-mirror`][git-mirror], for mirroring GitHub repos to GitLab/other Git remotes on a push webhook event from a GitHub repo.
 
+Docker Hub: https://hub.docker.com/r/flotwig/git-mirror
+
 ## Image Details
 
 * Port 80 is exposed to allow requests to `$WEBHOOK_PATH`
@@ -22,7 +24,7 @@ docker run -p 12345:80 \
   -e GIT_HOST=gitlab \
   -e WEBHOOK_PATH=/.gh-webhook \
   -e WEBHOOK_SECRET=your-github-webhook-pre-shared-secret \
-  git-mirror:latest
+  flotwig/git-mirror:latest
 ```
 
 ## Sample `docker-compose.yml`
@@ -33,7 +35,7 @@ This sets up the webhook at `http://0.0.0.0:12345/.gh-webhook`.
 
 ```yml
   mirror:
-    image: 'git-mirror:latest'
+    image: 'flotwig/git-mirror:latest'
     restart: always
     ports:
     - '12345:80'
