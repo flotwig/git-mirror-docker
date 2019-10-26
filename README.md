@@ -2,6 +2,8 @@
 
 This is a Docker image based on [`git-mirror`][git-mirror], for mirroring GitHub repos to GitLab/other Git remotes on a push webhook event from a GitHub repo.
 
+> Want to mirror GitLab CI status checks back to the original GitHub commits? Check out [`gitlab-ci-github-status-checks`][gitlab-ci-github-status-checks], also fully Dockerized.
+
 Docker Hub: https://hub.docker.com/r/flotwig/git-mirror
 
 ## Image Details
@@ -47,10 +49,11 @@ This sets up the webhook at `http://0.0.0.0:12345/.gh-webhook`.
     - '/your/github/and/GIT_HOST/privkey:/root/.ssh/id_rsa'
 ```
 
-[git-mirror]: https://github.com/fasterthanlime/git-mirror/
-
 ## Notes
 
 * The `owner/repo` folder pattern is kept when pushing to the new `$GIT_HOST`, so ensure that you have the correct repositories set up *before* you start sending webhook events.
 * SSH `known_host` verification is DISABLED by default, since there can be no user interaction. Make sure you are only connecting via trusted networks.
   * To bypass this, pass an empty file in to the `/root/.ssh/config` volume, and pass in your desired `known_hosts` configuration as `/root/.ssh/known_hosts`
+
+[git-mirror]: https://github.com/fasterthanlime/git-mirror/
+[gitlab-ci-github-status-checks]: https://github.com/flotwig/gitlab-ci-github-status-checks/
